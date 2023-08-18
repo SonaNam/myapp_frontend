@@ -134,18 +134,31 @@
       }
       .Manager-item2 {
         background-color: #fffff0;
+        width: 70%;
+        height: auto;
       }
       .Manager-item2 div {
         display: flex;
       }
-      .Manager-item2 img {
+      #info-image {
         text-align: left;
-        width: 20%;
+        width: 54%;
         margin-right: 10px;
       }
       .Manager-item2 p {
         margin: 1.8%;
         font-size: 0.9rem;
+      }
+      .Manager-item2 img {
+        width: 100%;
+      }
+      .main-list {
+        background-color: #fffff0;
+        padding: 2px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin: auto;
       }
       hr {
         border-color: bisque;
@@ -204,7 +217,11 @@
                   <!--manager창이미지및정보-->
                   <h4>카페정보</h4>
                   <div>
-                    <img src="./image/IMG_7729.jpg" alt="IMG-7729" />
+                    <img
+                      id="info-image"
+                      src="./image/IMG_7729.jpg"
+                      alt="IMG-7729"
+                    />
                     <ul style="font-family: fantasy">
                       <p>Sinyukan</p>
                       <p>manager</p>
@@ -241,8 +258,8 @@
                     <span title="공지및 가입인사">공지 및 가입인사</span>
                   </h3>
                   <hr />
-                  <div><a href=""> 공지사항</a></div>
-                  <div><a href=""> 가입인사""</a></div>
+                  <div><a href="">🔴 공지사항</a></div>
+                  <div><a href="">✔ 가입인사""</a></div>
                   <hr />
                   <h3>
                     <span title="자유게시판">자 유 게 시 판</span>
@@ -250,7 +267,7 @@
                   <hr />
                   <div>
                     <!--free-board 자유게시판-->
-                    <div><a href="">우리아이자랑게시판</a></div>
+                    <div><a href="">🐕우리아이자랑게시판</a></div>
                     <div><a href="">여긴뭘넣지</a></div>
                     <div><a href="">"" 병원정보</a></div>
                   </div>
@@ -265,7 +282,7 @@
                   </div>
                   <div>
                     <!--group-purchase 공동구매-->
-                    <div><a href="">링크 공동구매</a></div>
+                    <div><a href="">🐶링크 공동구매</a></div>
                     <div><a href="">" 체험단신청</a></div>
                     <div><a href="">" 여긴뭘넣을까</a></div>
                   </div>
@@ -277,7 +294,7 @@
                     <hr />
                     <div>
                       <!--missing 실종-->
-                      <div><a href="">링크 실종신고</a></div>
+                      <div><a href="">👮‍♂️링크 실종신고</a></div>
                       <div><a href="">링크 임보</a></div>
                       <div><a href="">링크 제보</a></div>
                     </div>
@@ -285,73 +302,54 @@
                 </div>
               </div>
               <div class="Manager-item2">
-                <h2>asasas</h2>
-                <a href=""
-                  ><div>
-                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
-                    실종등 넣는곳
-                  </div></a
-                >
-                <a href=""
-                  ><div>
-                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
-                    실종등 넣는곳
-                  </div></a
-                >
-                <a href=""
-                  ><div>
-                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
-                    실종등 넣는곳
-                  </div></a
-                >
-                <a href=""
-                  ><div>
-                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
-                    실종등 넣는곳
-                  </div></a
-                >
-                <a href=""
-                  ><div>
-                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
-                    실종등 넣는곳
-                  </div></a
-                >
-                <a href=""
-                  ><div>
-                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
-                    실종등 넣는곳
-                  </div></a
-                >
-                <a href=""
-                  ><div>
-                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
-                    실종등 넣는곳
-                  </div></a
-                >
-                <a href=""
-                  ><div>
-                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
-                    실종등 넣는곳
-                  </div></a
-                >
-                <a href=""
-                  ><div>
-                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
-                    실종등 넣는곳
-                  </div></a
-                >
-                <a href=""
-                  ><div>
-                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
-                    실종등 넣는곳
-                  </div></a
-                >
-                <a href=""
-                  ><div>
-                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
-                    실종등 넣는곳
-                  </div></a
-                >
+                <div class="announcement">
+                  <h2>공지사항</h2>
+                  <table>
+                    <tr id="announcement-Table-Title">
+                      <!--공지타이틀-->
+                      <th></th>
+                      <th scope="col">
+                        <span>제목</span>
+                      </th>
+                      <th scope="col">작성자</th>
+                      <th scope="col">작성일</th>
+                      <th scope="col">조회</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </table>
+                </div>
+                <div class="main-list">
+                  <h2>체험단 공동구매 !</h2>
+                  <a href="https://www.instagram.com/bpet_heeya/"
+                    ><img
+                      src="./image/230817_러블링_목걸이_체험단_배너_600.jpg"
+                  /></a>
+                  <a href="https://www.instagram.com/gentlwuff/"
+                    ><img src="/image/230816_젠틀우프_체험단_배너_600.jpg"
+                  /></a>
+                  <a href="https://www.instagram.com/brgoggan_1993/"
+                    ><img src="./image/230807_반려곳간_체험단_배너_600.jpg"
+                  /></a>
+                  <a
+                    href="https://www.hanwharesort.co.kr/irsweb/resort3/reserve/contract.do?contractNo=20002191"
+                    ><img
+                      src="./image/230802_한화리조트_멍패커룸_소문내기_배너_600.jpg"
+                  /></a>
+                  <a href="https://harimpetfood.com/surl/P/1986"
+                    ><img
+                      src="./image/230801_하림펫_더리얼_베스트픽_아웃링크_배너_600.jpg"
+                  /></a>
+                  <a
+                    href="https://store.meritzfire.com/pet/product.do#!/contractPopup"
+                    ><img
+                      src="./image/230807_메리츠화재_아웃링크_배너_600x97.jpg"
+                  /></a>
+                  <a href=""
+                    ><img
+                      src="./image/매달_몽도르프_응원_스타벅스_배너_600.png"
+                  /></a>
+                  >
+                </div>
               </div>
             </div>
           </div>
