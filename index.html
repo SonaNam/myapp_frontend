@@ -4,6 +4,343 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      body {
+        width: 100vw;
+        margin: 0 auto;
+        background-color: #fffff0;
+      }
+      .modal {
+        display: none; /* 모달 초기에 숨김 */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* 배경 반투명 블랙 */
+        z-index: 1000;
+      }
+
+      .modal-content {
+        text-align: center;
+        background-color: white;
+        width: 50%;
+        max-width: 400px;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .top-menu-item1 {
+        padding: 5px;
+        margin: 5px;
+        font-size: 13px;
+      }
+      .top-menu-item2 {
+        padding: 5px;
+        margin: 5px;
+        font-size: 13px;
+      }
+
+      .Manager-container {
+        display: flex;
+      }
+      .Manager-item1 {
+        background-color: white;
+        padding: 2px;
+        justify-content: left;
+      }
+      .Manager-item2 {
+        background-color: white;
+        padding: 2px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin: auto;
+      }
+      .Manager-item2 a {
+        margin: 10px;
+      }
+
+      .Manager-item3 {
+        background-color: white;
+        padding: 2px;
+        justify-content: left;
+      }
+      .cafe-manu-list div {
+        margin-bottom: 10px;
+      }
+      .top-image {
+        width: 100%;
+        height: 35vw;
+        background-image: url(../../IMG_7729.jpg);
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .sign-up-modalbutton {
+        background-color: orange;
+        color: white;
+        padding: 0.7em;
+        margin: 3%;
+      }
+      .sign-in-modalbutton {
+        background-color: white;
+        padding: 0.5em;
+      }
+      .signinButton {
+        background-color: orange;
+        color: white;
+        margin: 2%;
+      }
+
+      .modal-content div input {
+        height: 1.76em;
+        margin: 5.8%;
+      }
+      .top-image {
+        position: relative;
+      }
+      .main_image_text {
+        position: absolute;
+        font-family: cursive;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: beige;
+        font-size: 2.9em;
+      }
+      .Manager-item1 {
+        background-color: #fffff0;
+        width: 17%;
+      }
+      .Manager-item2 {
+        background-color: #fffff0;
+      }
+      .Manager-item2 div {
+        display: flex;
+      }
+      .Manager-item2 img {
+        text-align: left;
+        width: 20%;
+        margin-right: 10px;
+      }
+      .Manager-item2 p {
+        margin: 1.8%;
+        font-size: 0.9rem;
+      }
+      hr {
+        border-color: bisque;
+        display: block;
+        margin-block-start: 0.3em;
+        margin-block-end: 0.3em;
+        margin-inline-start: auto;
+        margin-inline-end: 1.5em;
+        overflow: hidden;
+        border-style: double;
+        border-width: 0.4vw;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div class="cafe-body-skin">
+      <div class="front-cafe">
+        <a
+          name="myCafeUrlLink"
+          onclick="updateMoveMenu()"
+          href="http://127.0.0.1:5500/index.html"
+          target="cafe_main"
+        >
+          <img
+            class="top-image"
+            src="https://i.ibb.co/x80M31D/22.png"
+            alt="반려견 훈련 교육법, 강아지 종류 유기견 입양방법"
+          />
+          <h1>
+            <span class="main_image_text">PetFrends</span>
+          </h1>
+        </a>
+      </div>
+      <div id="top-menu-container">
+        <!--상단 모아보기메뉴 (추가테이블체크)-->
+        <a class="top-menu-item1" href="">전체글보기</a>
+        <a class="top-menu-item2" href="">이미지모아보기</a>
+      </div>
+    </div>
+    <hr />
+    <div class="content-area">
+      <div class="skin-1080 f">
+        <br />
+        <div class="cafe-info-action">
+          <div class="cafe-info-data">
+            <div class="Manager-container">
+              <div class="Manager-item1">
+                <div class="Manager-item2">
+                  <!--manager창이미지및정보-->
+                  <h4>카페정보</h4>
+                  <div>
+                    <img src="./image/IMG_7729.jpg" alt="IMG-7729" />
+                    <ul style="font-family: fantasy">
+                      <p>Sinyukan</p>
+                      <p>manager</p>
+                      <p>since 2023.08.08</p>
+                    </ul>
+                  </div>
+                </div>
+                <div class="cafe-modal">
+                  <br /><button class="signinButton">로그인</button>
+                  <button class="signupButton">회원가입</button>
+                  <div class="modal">
+                    <div class="modal-content">
+                      <!--모달창-->
+                      <form>
+                        <h2>로 그 인</h2>
+                        <div>
+                          <input type="text" placeholder="id" />
+                          <br /><input type="password" placeholder="Password" />
+                        </div>
+                        <button class="sign-in-modalbutton" type="submit">
+                          Sign in
+                        </button>
+                        <button class="sign-up-modalbutton" type="submit">
+                          Sign Up
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+                <div class="cafe-manu-list">
+                  <!--announcement 공지사항-->
+                  <h3>
+                    <span title="공지및 가입인사">공지 및 가입인사</span>
+                  </h3>
+                  <hr />
+                  <div><a href=""> 공지사항</a></div>
+                  <div><a href=""> 가입인사""</a></div>
+                  <hr />
+                  <h3>
+                    <span title="자유게시판">자 유 게 시 판</span>
+                  </h3>
+                  <hr />
+                  <div>
+                    <!--free-board 자유게시판-->
+                    <div><a href="">우리아이자랑게시판</a></div>
+                    <div><a href="">여긴뭘넣지</a></div>
+                    <div><a href="">"" 병원정보</a></div>
+                  </div>
+                  <div>
+                    <hr />
+                    <h3>
+                      <span title="공동구매 및 체험단신청"
+                        >공동구매 및 체험단신청</span
+                      >
+                    </h3>
+                    <hr />
+                  </div>
+                  <div>
+                    <!--group-purchase 공동구매-->
+                    <div><a href="">링크 공동구매</a></div>
+                    <div><a href="">" 체험단신청</a></div>
+                    <div><a href="">" 여긴뭘넣을까</a></div>
+                  </div>
+                  <div>
+                    <hr />
+                    <h3>
+                      <span title="우리아이찾아주세요">우리아이찾아주세요</span>
+                    </h3>
+                    <hr />
+                    <div>
+                      <!--missing 실종-->
+                      <div><a href="">링크 실종신고</a></div>
+                      <div><a href="">링크 임보</a></div>
+                      <div><a href="">링크 제보</a></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="Manager-item2">
+                <h2>asasas</h2>
+                <a href=""
+                  ><div>
+                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
+                    실종등 넣는곳
+                  </div></a
+                >
+                <a href=""
+                  ><div>
+                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
+                    실종등 넣는곳
+                  </div></a
+                >
+                <a href=""
+                  ><div>
+                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
+                    실종등 넣는곳
+                  </div></a
+                >
+                <a href=""
+                  ><div>
+                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
+                    실종등 넣는곳
+                  </div></a
+                >
+                <a href=""
+                  ><div>
+                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
+                    실종등 넣는곳
+                  </div></a
+                >
+                <a href=""
+                  ><div>
+                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
+                    실종등 넣는곳
+                  </div></a
+                >
+                <a href=""
+                  ><div>
+                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
+                    실종등 넣는곳
+                  </div></a
+                >
+                <a href=""
+                  ><div>
+                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
+                    실종등 넣는곳
+                  </div></a
+                >
+                <a href=""
+                  ><div>
+                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
+                    실종등 넣는곳
+                  </div></a
+                >
+                <a href=""
+                  ><div>
+                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
+                    실종등 넣는곳
+                  </div></a
+                >
+                <a href=""
+                  ><div>
+                    공지 공동구매 체험단 실종등 넣는곳공지 공동구매 체험단
+                    실종등 넣는곳
+                  </div></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
 </html>
