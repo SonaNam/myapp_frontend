@@ -20,11 +20,11 @@
         background-color: rgba(0, 0, 0, 0.5); /* 배경 반투명 블랙 */
         z-index: 1000;
       }
-
       .modal-content {
         text-align: center;
         background-color: white;
-        width: 50%;
+        width: 60%;
+        height: 22vw;
         max-width: 400px;
         margin: 10% auto;
         padding: 20px;
@@ -47,19 +47,6 @@
 
       .Manager-container {
         display: flex;
-      }
-      .Manager-item1 {
-        background-color: white;
-        padding: 2px;
-        justify-content: left;
-      }
-      .Manager-item2 {
-        background-color: white;
-        padding: 2px;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        margin: auto;
       }
       .Manager-item2 a {
         margin: 10px;
@@ -99,7 +86,7 @@
       }
 
       .modal-content div input {
-        height: 1.76em;
+        height: 2.76em;
         margin: 5.8%;
       }
       .main_image_text {
@@ -131,14 +118,17 @@
       .Manager-item1 {
         background-color: #fffff0;
         width: 17%;
+        padding: 2px;
+        justify-content: left;
       }
       .Manager-item2 {
         background-color: #fffff0;
         width: 70%;
         height: auto;
-      }
-      .Manager-item2 div {
+        position: relative;
         display: flex;
+        justify-content: center;
+        align-items: flex-start;
       }
       #info-image {
         text-align: left;
@@ -151,14 +141,6 @@
       }
       .Manager-item2 img {
         width: 100%;
-      }
-      .main-list {
-        background-color: #fffff0;
-        padding: 2px;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        margin: auto;
       }
       hr {
         border-color: bisque;
@@ -177,6 +159,95 @@
       }
       button {
         cursor: pointer;
+      }
+      .main-list,
+      .post-list,
+      .membershipboard,
+      .fetimageboard,
+      .hospitalboard,
+      .groupbuying,
+      .preuser,
+      .missing {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        background-color: #fffff0;
+      }
+      .main-list {
+        /* z-index 1*/
+        z-index: 1;
+
+        background-color: #fffff0;
+        padding: 2px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin: auto;
+        position: absolute;
+      }
+      .post-list {
+        position: absolute;
+        background-color: red;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        height: 90%;
+      }
+      .membershipboard {
+        position: absolute;
+        background-color: blue;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        height: 90%;
+      }
+      .fetimageboard {
+        position: absolute;
+        background-color: orange;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        height: 90%;
+      }
+      .hospitalboard {
+        position: absolute;
+        background-color: yellow;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        height: 90%;
+      }
+      .groupbuying {
+        position: absolute;
+        background-color: green;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        height: 90%;
+      }
+      .preuser {
+        position: absolute;
+        background-color: purple;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        height: 90%;
+      }
+      .missing {
+        position: absolute;
+        background-color: grey;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        height: 90%;
+      }
+      .post-item {
+        border: 0.5vw;
+        width: 100%;
+        align-items: center;
+        padding: 1vw;
+        background-color: fffff0;
+        margin-bottom: 0px;
       }
     </style>
   </head>
@@ -219,7 +290,7 @@
                   <div>
                     <img
                       id="info-image"
-                      src="./image/IMG_7729.jpg"
+                      src="../image/IMG_7729.jpg"
                       alt="IMG-7729"
                     />
                     <ul style="font-family: fantasy">
@@ -258,8 +329,10 @@
                     <span title="공지및 가입인사">공지 및 가입인사</span>
                   </h3>
                   <hr />
-                  <div><a href="">🔴 공지사항</a></div>
-                  <div><a href="">✔ 가입인사""</a></div>
+                  <div><a href="" data-target="post-list">🔴 공지사항</a></div>
+                  <div>
+                    <a href="" data-target="membershipboard">✔ 가입인사""</a>
+                  </div>
                   <hr />
                   <h3>
                     <span title="자유게시판">자 유 게 시 판</span>
@@ -267,9 +340,15 @@
                   <hr />
                   <div>
                     <!--free-board 자유게시판-->
-                    <div><a href="">🐕우리아이자랑게시판</a></div>
+                    <div>
+                      <a href="" data-target="fetimageboard"
+                        >🐕우리아이자랑게시판</a
+                      >
+                    </div>
                     <div><a href="">여긴뭘넣지</a></div>
-                    <div><a href="">"" 병원정보</a></div>
+                    <div>
+                      <a href="" data-target="hospitalboard">"" 병원정보</a>
+                    </div>
                   </div>
                   <div>
                     <hr />
@@ -282,8 +361,10 @@
                   </div>
                   <div>
                     <!--group-purchase 공동구매-->
-                    <div><a href="">🐶링크 공동구매</a></div>
-                    <div><a href="">" 체험단신청</a></div>
+                    <div>
+                      <a href="" data-target="groupbuying">🐶링크 공동구매</a>
+                    </div>
+                    <div><a href="" data-target="preuser">" 체험단신청</a></div>
                     <div><a href="">" 여긴뭘넣을까</a></div>
                   </div>
                   <div>
@@ -294,7 +375,9 @@
                     <hr />
                     <div>
                       <!--missing 실종-->
-                      <div><a href="">👮‍♂️링크 실종신고</a></div>
+                      <div>
+                        <a href="" data-target="missing">👮‍♂️링크 실종신고</a>
+                      </div>
                       <div><a href="">링크 임보</a></div>
                       <div><a href="">링크 제보</a></div>
                     </div>
@@ -302,53 +385,161 @@
                 </div>
               </div>
               <div class="Manager-item2">
-                <div class="announcement">
-                  <h2>공지사항</h2>
-                  <table>
-                    <tr id="announcement-Table-Title">
-                      <!--공지타이틀-->
-                      <th></th>
-                      <th scope="col">
-                        <span>제목</span>
-                      </th>
-                      <th scope="col">작성자</th>
-                      <th scope="col">작성일</th>
-                      <th scope="col">조회</th>
-                      <th scope="col"></th>
-                    </tr>
-                  </table>
-                </div>
                 <div class="main-list">
                   <h2>체험단 공동구매 !</h2>
                   <a href="https://www.instagram.com/bpet_heeya/"
                     ><img
-                      src="./image/230817_러블링_목걸이_체험단_배너_600.jpg"
+                      src="../image/230817_러블링_목걸이_체험단_배너_600.jpg"
                   /></a>
                   <a href="https://www.instagram.com/gentlwuff/"
-                    ><img src="/image/230816_젠틀우프_체험단_배너_600.jpg"
+                    ><img src="../image/230816_젠틀우프_체험단_배너_600.jpg"
                   /></a>
                   <a href="https://www.instagram.com/brgoggan_1993/"
-                    ><img src="./image/230807_반려곳간_체험단_배너_600.jpg"
+                    ><img src="../image/230807_반려곳간_체험단_배너_600.jpg"
                   /></a>
                   <a
                     href="https://www.hanwharesort.co.kr/irsweb/resort3/reserve/contract.do?contractNo=20002191"
                     ><img
-                      src="./image/230802_한화리조트_멍패커룸_소문내기_배너_600.jpg"
+                      src="../image/230802_한화리조트_멍패커룸_소문내기_배너_600.jpg"
                   /></a>
                   <a href="https://harimpetfood.com/surl/P/1986"
                     ><img
-                      src="./image/230801_하림펫_더리얼_베스트픽_아웃링크_배너_600.jpg"
+                      src="../image/230801_하림펫_더리얼_베스트픽_아웃링크_배너_600.jpg"
                   /></a>
                   <a
                     href="https://store.meritzfire.com/pet/product.do#!/contractPopup"
                     ><img
-                      src="./image/230807_메리츠화재_아웃링크_배너_600x97.jpg"
+                      src="../image/230807_메리츠화재_아웃링크_배너_600x97.jpg"
                   /></a>
                   <a href=""
                     ><img
-                      src="./image/매달_몽도르프_응원_스타벅스_배너_600.png"
+                      src="../image/매달_몽도르프_응원_스타벅스_배너_600.png"
                   /></a>
-                  >
+                </div>
+                <div class="post-list">
+                  <h2>공지사항</h2>
+                  <table class="post-item">
+                    <tr id="normalTableTitle">
+                      <th scope="col">
+                        <span>제목</span>
+                      </th>
+                      <th>작성자</th>
+                      <th>작성일</th>
+                      <th>조회</th>
+                      <th>좋아요</th>
+                    </tr>
+                    <tbody>
+                      <tr></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="membershipboard">
+                  <!--가입인사-->
+                  <h2>가입인사</h2>
+                  <table class="post-item">
+                    <tr id="normalTableTitle">
+                      <th scope="col">
+                        <span>제목</span>
+                      </th>
+                      <th>작성자</th>
+                      <th>작성일</th>
+                      <th>조회</th>
+                      <th>좋아요</th>
+                    </tr>
+                    <tbody>
+                      <tr></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="fetimageboard">
+                  <!--오렌지-->
+                  <h2>우리아이자랑게시판</h2>
+                  <table class="post-item">
+                    <tr id="normalTableTitle">
+                      <th scope="col">
+                        <span>제목</span>
+                      </th>
+                      <th>작성자</th>
+                      <th>작성일</th>
+                      <th>조회</th>
+                      <th>좋아요</th>
+                    </tr>
+                    <tbody>
+                      <tr></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="hospitalboard">
+                  <!--노랑-->
+                  <h2>병원정보</h2>
+                  <table class="post-item">
+                    <tr id="normalTableTitle">
+                      <th scope="col">
+                        <span>제목</span>
+                      </th>
+                      <th>작성자</th>
+                      <th>작성일</th>
+                      <th>조회</th>
+                      <th>좋아요</th>
+                    </tr>
+                    <tbody>
+                      <tr></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="groupbuying">
+                  <!--초록-->
+                  <h2>공동구매</h2>
+                  <table class="post-item">
+                    <tr id="normalTableTitle">
+                      <th scope="col">
+                        <span>제목</span>
+                      </th>
+                      <th>작성자</th>
+                      <th>작성일</th>
+                      <th>조회</th>
+                      <th>좋아요</th>
+                    </tr>
+                    <tbody>
+                      <tr></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="preuser">
+                  <!--보라색-->
+                  <h2>체험단</h2>
+                  <table class="post-item">
+                    <tr id="normalTableTitle">
+                      <th scope="col">
+                        <span>제목</span>
+                      </th>
+                      <th>작성자</th>
+                      <th>작성일</th>
+                      <th>조회</th>
+                      <th>좋아요</th>
+                    </tr>
+                    <tbody>
+                      <tr></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="missing">
+                  <!--회색-->
+                  <h2>실종신고</h2>
+                  <table class="post-item">
+                    <tr id="normalTableTitle">
+                      <th scope="col">
+                        <span>제목</span>
+                      </th>
+                      <th>작성자</th>
+                      <th>작성일</th>
+                      <th>조회</th>
+                      <th>좋아요</th>
+                    </tr>
+                    <tbody>
+                      <tr></tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
