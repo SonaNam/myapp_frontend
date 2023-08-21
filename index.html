@@ -11,28 +11,58 @@
         background-color: #fffff0;
       }
       .modal {
-        display: none; /* 모달 초기에 숨김 */
+        display: none;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* 배경 반투명 블랙 */
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+      .signup-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
         z-index: 1000;
       }
       .modal-content {
         text-align: center;
         background-color: white;
-        width: 60%;
+        width: 100%;
         height: 22vw;
-        max-width: 400px;
+        max-width: 35%;
         margin: 10% auto;
-        padding: 20px;
+        padding: 2%;
         border-radius: 5px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         display: flex;
         flex-direction: column;
         align-items: center;
+        overflow-y: auto;
+      }
+      .signup-modal-content {
+        text-align: center;
+        background-color: white;
+        width: 70%;
+        max-width: 500px;
+        height: auto;
+        margin: 10% auto;
+        padding: 2%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
+      }
+      .signup-modal-content input {
+        height: 2.56em;
+        margin: 5.8%;
       }
       .top-menu-item1 {
         padding: 5px;
@@ -69,20 +99,20 @@
         background-size: cover;
         background-repeat: no-repeat;
       }
-      .sign-up-modalbutton {
+      .sign-in-modalbutton {
         background-color: orange;
         color: white;
         padding: 0.7em;
         margin: 3%;
       }
-      .sign-in-modalbutton {
+      .sign-up-modalbutton {
         background-color: white;
         padding: 0.5em;
       }
       .signinButton {
         background-color: orange;
         color: white;
-        margin: 2%;
+        margin: 3%;
       }
 
       .modal-content div input {
@@ -187,59 +217,59 @@
       }
       .post-list {
         position: absolute;
-        background-color: red;
+        background-color: #fffff0;
         top: 0;
         left: 0;
         z-index: 0;
-        height: 90%;
+        height: 100%;
       }
       .membershipboard {
         position: absolute;
-        background-color: blue;
+        background-color: #fffff0;
         top: 0;
         left: 0;
         z-index: 0;
-        height: 90%;
+        height: 100%;
       }
       .fetimageboard {
         position: absolute;
-        background-color: orange;
+        background-color: #fffff0;
         top: 0;
         left: 0;
         z-index: 0;
-        height: 90%;
+        height: 100%;
       }
       .hospitalboard {
         position: absolute;
-        background-color: yellow;
+        background-color: #fffff0;
         top: 0;
         left: 0;
         z-index: 0;
-        height: 90%;
+        height: 100%;
       }
       .groupbuying {
         position: absolute;
-        background-color: green;
+        background-color: #fffff0;
         top: 0;
         left: 0;
         z-index: 0;
-        height: 90%;
+        height: 100%;
       }
       .preuser {
         position: absolute;
-        background-color: purple;
+        background-color: #fffff0;
         top: 0;
         left: 0;
         z-index: 0;
-        height: 90%;
+        height: 100%;
       }
       .missing {
         position: absolute;
-        background-color: grey;
+        background-color: #fffff0;
         top: 0;
         left: 0;
         z-index: 0;
-        height: 90%;
+        height: 100%;
       }
       .post-item {
         border: 0.5vw;
@@ -318,6 +348,25 @@
                         <button class="sign-up-modalbutton" type="submit">
                           Sign Up
                         </button>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="signup-modal">
+                    <div class="signup-modal-content">
+                      <!--회원가입 모달창-->
+                      <form>
+                        <h2>Signup</h2>
+                        <div>
+                          <input type="text" placeholder="id" />
+                          <br />
+                          <input type="password" placeholder="password" />
+                          <br />
+                          <input type="text" placeholder="nickname" />
+                          <br />
+                          <input type="text" placeholder="phone" />
+                          <br />
+                          <input type="text" placeholder="email" />
+                        </div>
                       </form>
                     </div>
                   </div>
