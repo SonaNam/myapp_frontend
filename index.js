@@ -1,3 +1,23 @@
+function cardTemplate(no, title, content, creatorName, image) {
+  const tr = document.createElement("div");
+  tr.innerHTML = `
+  <div style="width:300px; margin-bottom:3rem;" data-no="${no}">
+    <em>${title}</em>
+    <hr>
+    <h3>${content}</h3>
+    <p>${content}</p>
+    <p>${creatorName}</p>
+    <img src="${image}" alt="">
+
+    <hr>
+    <div style="display:flex; justify-content:space-between;">
+      <button class="btn-remove">삭제</button>
+      <button class="btn-rcorrection">수정</button>
+    </div>
+  </div>
+`;
+  return tr; // 변수 이름 수정
+}
 document.addEventListener("DOMContentLoaded", function () {
   const signinButton = document.querySelector(".signinButton");
   const signupButton = document.querySelector(".signupButton");
@@ -24,30 +44,113 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-// 게시물 클릭시 z-index
+// 게시물 클릭시 visible
 
 const boards = document.querySelectorAll(
-  ".post-list, .membershipboard, .fetimageboard, .hospitalboard, .groupbuying, .preuser, .missing"
+  ".main-list, .post-list, .membershipboard, .fetimageboard, .hospitalboard, .groupbuying, .preuser, .missing"
 );
 const links = document.querySelectorAll("[data-target]");
 
-// 링크에 클릭 이벤트 리스너 추가
+// 게시판에 클릭 이벤트 리스너 추가
 links.forEach((link) => {
   link.addEventListener("click", function (e) {
     event.preventDefault();
 
-    // 클릭한 링크의 data-target
+    // 클릭한 게시판 data-target
     const targetBoard = this.getAttribute("data-target");
 
-    // 모든 게시판의 z-index 값을 0으로 초기화
+    // 모든 게시판의 visibility 속성을 hidden으로 설정  다 hidden줌
     boards.forEach((board) => {
-      board.style.zIndex = 0;
+      board.style.visibility = "hidden";
     });
 
-    // 클릭한 링크에 게시판을 z-index 값을 2로설정
+    // 클릭한 게시판에 visible로 설정   클릭한게시판만 visible줌
     const targetElement = document.querySelector("." + targetBoard);
     if (targetElement) {
-      targetElement.style.zIndex = 2;
+      targetElement.style.visibility = "visible";
+    }
+  });
+  // 게시물 글쓰기 모달창
+});
+document.addEventListener("DOMContentLoaded", () => {
+  // "게시물작성하기" 버튼 요소 가져오기
+  const postmodal = document.getElementById("postmodal");
+  // 모달 창 요소 가져오기
+  const modal1 = document.querySelector(".modal1");
+
+  // 버튼 클릭 이벤트 처리
+  postmodal.addEventListener("click", function () {
+    // 모달 창 보이도록 스타일 변경
+    modal1.style.display = "block";
+  });
+
+  // 모달 창 외부를 클릭하면 모달 창 닫기
+  window.addEventListener("click", function (event) {
+    if (event.target == modal1) {
+      modal1.style.display = "none";
     }
   });
 });
+
+const post_btn = document.querySelector("#add_post_btn");
+const title = document.querySelector("#title");
+const text_content = document.querySelector("#text_content");
+const file = document.querySelector("#img");
+const fetimageboard = document.querySelector(".fetimageboard");
+console.log(img);
+console.log(title);
+console.log(text_content);
+
+post_btn.addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  const reader = new FileReader();
+  reader.addEventListener("load", async (e) => {
+    const img = e.target.result;
+
+    const response = await fetch("http://localhost:8080/posts/addPost", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title.value,
+        content: text_content.value,
+        image: img,
+      }),
+    });
+    const result = await response.json();
+    const { data } = result;
+    fetimageboard.append(
+      cardTemplate(
+        data.no,
+        data.title,
+        data.content,
+        data.creatorName,
+        data.image
+      )
+    );
+  });
+
+  reader.readAsDataURL(file.files[0]);
+
+  // 버튼 이벤트
+});
+
+(async () => {
+  const response = await fetch("http://localhost:8080/posts/getPost");
+
+  const result = await response.json();
+
+  result.forEach((item) => {
+    fetimageboard.append(
+      cardTemplate(
+        item.no,
+        item.title,
+        item.content,
+        item.creatorName,
+        item.image
+      )
+    );
+  });
+})();

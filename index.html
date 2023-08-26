@@ -20,6 +20,16 @@
         background-color: rgba(0, 0, 0, 0.5);
         z-index: 1000;
       }
+      .modal1 {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
       .signup-modal {
         display: none;
         position: fixed;
@@ -36,6 +46,21 @@
         width: 100%;
         height: 22vw;
         max-width: 35%;
+        margin: 10% auto;
+        padding: 2%;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
+      }
+      .modal1-content {
+        text-align: center;
+        background-color: white;
+        width: 100%;
+        height: 50vw;
+        max-width: 45%;
         margin: 10% auto;
         padding: 2%;
         border-radius: 5px;
@@ -220,7 +245,7 @@
         background-color: #fffff0;
         top: 0;
         left: 0;
-        z-index: 0;
+
         height: 100%;
       }
       .membershipboard {
@@ -228,7 +253,7 @@
         background-color: #fffff0;
         top: 0;
         left: 0;
-        z-index: 0;
+
         height: 100%;
       }
       .fetimageboard {
@@ -236,7 +261,7 @@
         background-color: #fffff0;
         top: 0;
         left: 0;
-        z-index: 0;
+
         height: 100%;
       }
       .hospitalboard {
@@ -244,7 +269,7 @@
         background-color: #fffff0;
         top: 0;
         left: 0;
-        z-index: 0;
+
         height: 100%;
       }
       .groupbuying {
@@ -252,7 +277,7 @@
         background-color: #fffff0;
         top: 0;
         left: 0;
-        z-index: 0;
+
         height: 100%;
       }
       .preuser {
@@ -260,7 +285,7 @@
         background-color: #fffff0;
         top: 0;
         left: 0;
-        z-index: 0;
+
         height: 100%;
       }
       .missing {
@@ -268,7 +293,7 @@
         background-color: #fffff0;
         top: 0;
         left: 0;
-        z-index: 0;
+
         height: 100%;
       }
       .post-item {
@@ -278,6 +303,16 @@
         padding: 1vw;
         background-color: fffff0;
         margin-bottom: 0px;
+      }
+      footer button {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 1% 1%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 0.8vw;
       }
     </style>
   </head>
@@ -504,19 +539,49 @@
                   <!--오렌지-->
                   <h2>우리아이자랑게시판</h2>
                   <table class="post-item">
-                    <tr id="normalTableTitle">
-                      <th scope="col">
-                        <span>제목</span>
-                      </th>
-                      <th>작성자</th>
-                      <th>작성일</th>
-                      <th>조회</th>
-                      <th>좋아요</th>
-                    </tr>
                     <tbody>
-                      <tr></tr>
+                      <tr id="normalTableTitle">
+                        <th scope="col">
+                          <span>제목</span>
+                        </th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                        <th>조회</th>
+                        <th>좋아요</th>
+                      </tr>
                     </tbody>
                   </table>
+                  <footer>
+                    <button id="postmodal">게시물작성하기</button>
+                  </footer>
+                </div>
+                <div class="modal1">
+                  <div class="modal1-content">
+                    <!--모달창-->
+                    <form>
+                      <h2>posting</h2>
+                      <div>
+                        <input
+                          type="text"
+                          style="height: 2.6em; margin: 5.8%"
+                          placeholder="제목을작성해주세요."
+                          id="title"
+                        />
+                        <br /><textarea
+                          cols="70"
+                          rows="25"
+                          id="text_content"
+                        ></textarea>
+                        <input
+                          type="image"
+                          style="width: 200px"
+                          accept="image/* "
+                        />
+                        <br /><input type="file" id="img" />
+                      </div>
+                      <button id="add_post_btn">작성하기</button>
+                    </form>
+                  </div>
                 </div>
                 <div class="hospitalboard">
                   <!--노랑-->
