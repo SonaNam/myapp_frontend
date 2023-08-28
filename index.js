@@ -2,6 +2,7 @@ function cardTemplate(no, title, content, creatorName, image) {
   const tr = document.createElement("div");
   tr.innerHTML = `
   <div style="width:300px; margin-bottom:3rem;" data-no="${no}">
+    <em>${no}</em>
     <em>${title}</em>
     <hr>
     <h3>${content}</h3>
@@ -12,7 +13,7 @@ function cardTemplate(no, title, content, creatorName, image) {
     <hr>
     <div style="display:flex; justify-content:space-between;">
       <button class="btn-remove">삭제</button>
-      <button class="btn-rcorrection">수정</button>
+      <button class="btn-modify" id="btn-modify">수정</button>
     </div>
   </div>
 `;
@@ -154,3 +155,49 @@ post_btn.addEventListener("click", async (e) => {
     );
   });
 })();
+
+// 삭제 기능 추가
+document.addEventListener("click", async function (event) {
+  if (event.target.classList.contains("btn-remove")) {
+    const no = event.target.parentElement.parentElement.dataset.no;
+    console.log(no);
+    const response = await fetch(
+      `http://localhost:8080/posts/removePost?no=${no}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (response.status === 200) {
+      // 삭제 성공한 경우 해당 게시물을 화면에서 제거
+      const deletedElement = document.querySelector(`[data-no="${no}"]`);
+      if (deletedElement) {
+        deletedElement.remove();
+      }
+    } else {
+    }
+  }
+});
+// 수정
+document.addEventListener("DOMContentLoaded", function () {
+  const modifyButtons = document.querySelectorAll(".btn-modify");
+
+  modifyButtons.forEach((button) => {
+    button.addEventListener("click", function (event) {
+      const card = event.target.closest("div[data-no]");
+      const no = card.getAttribute("data-no");
+      const title = card.querySelector("em").innerText;
+      const content = card.querySelector("h3").innerText;
+
+      // 모달에 데이터 바인딩
+      document.getElementById("modalNo").value = no;
+      document.getElementById("modalTitleInput").value = title;
+      document.getElementById("modalContentInput").value = content;
+
+      // 모달 표시
+      document.querySelector(".modal-modify").style.display = "block";
+    });
+  });
+
+  // 모달 닫기 로직, 모달 저장 로직 등을 추가
+});
