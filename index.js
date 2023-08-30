@@ -51,47 +51,46 @@ document.addEventListener("DOMContentLoaded", function () {
       signUpModal.style.display = "none";
     }
   });
-});
 
-const boards = document.querySelectorAll(
-  ".main-list, .post-list, .membershipboard, .fetimageboard, .hospitalboard, .groupbuying, .preuser, .missing"
-);
-const links = document.querySelectorAll("[data-target]");
+  const boards = document.querySelectorAll(
+    ".main-list, .post-list, .membershipboard, .fetimageboard, .hospitalboard, .groupbuying, .preuser, .missing"
+  );
 
-// 게시판에 클릭 이벤트 리스너 추가
-links.forEach((link) => {
-  link.addEventListener("click", function (e) {
-    event.preventDefault();
-
-    // 클릭한 게시판 data-target
-    const targetBoard = this.getAttribute("data-target");
-
-    // 모든 게시판의 visibility 속성을 hidden으로 설정  다 hidden줌
-    boards.forEach((board) => {
+  // main-list 제외한 모든 게시판을 hidden 상태로 설정
+  boards.forEach((board) => {
+    if (!board.classList.contains("main-list")) {
       board.style.visibility = "hidden";
-    });
-
-    // 클릭한 게시판에 visible로 설정   클릭한게시판만 visible줌
-    const targetElement = document.querySelector("." + targetBoard);
-    if (targetElement) {
-      targetElement.style.visibility = "visible";
     }
   });
-  // 게시물 글쓰기 모달창
-});
-document.addEventListener("DOMContentLoaded", () => {
-  // "게시물작성하기" 버튼 요소 가져오기
-  const postmodal = document.getElementById("postmodal");
-  // 모달 창 요소 가져오기
-  const modal1 = document.querySelector(".modal1");
 
-  // 버튼 클릭 이벤트 처리
+  const links = document.querySelectorAll("[data-target]");
+
+  // 게시판에 클릭 이벤트 리스너 추가
+  links.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      event.preventDefault();
+
+      const targetBoard = this.getAttribute("data-target");
+
+      // 모든 게시판을 hidden 상태로 설정
+      boards.forEach((board) => {
+        board.style.visibility = "hidden";
+      });
+
+      // 클릭한 게시판을 visible 상태로 설정
+      const targetElement = document.querySelector("." + targetBoard);
+      if (targetElement) {
+        targetElement.style.visibility = "visible";
+      }
+    });
+  });
+
+  const postmodal = document.getElementById("postmodal");
+  const modal1 = document.querySelector(".modal1");
   postmodal.addEventListener("click", function () {
-    // 모달 창 보이도록 스타일 변경
     modal1.style.display = "block";
   });
 
-  // 모달 창 외부를 클릭하면 모달 창 닫기
   window.addEventListener("click", function (event) {
     if (event.target == modal1) {
       modal1.style.display = "none";
@@ -128,7 +127,7 @@ post_btn.addEventListener("click", async (e) => {
     });
     const result = await response.json();
     const { data } = result;
-    fetimageboard.append(
+    fetimageboard.prepend(
       cardTemplate(
         data.no,
         data.title,
@@ -150,7 +149,7 @@ post_btn.addEventListener("click", async (e) => {
   const result = await response.json();
 
   result.forEach((item) => {
-    fetimageboard.append(
+    fetimageboard.prepend(
       cardTemplate(
         item.no,
         item.title,
