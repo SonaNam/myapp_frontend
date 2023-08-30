@@ -1,24 +1,31 @@
+let currentPage = 0; // 현재 페이지 번호
+let isLastPage = false; // 마지막 페이지 인지 여부
+const PAGE_SIZE = 10; // 고정된 페이지 사이즈
+let currentQuery = ""; // 현재 검색 키워드
+
 function cardTemplate(no, title, content, creatorName, image) {
   const tr = document.createElement("div");
   tr.innerHTML = `
-  <div style="width:300px; margin-bottom:3rem;" data-no="${no}">
-    <em>${no}</em>
-    <em>${title}</em>
-    <hr>
-    <h3>${content}</h3>
-    <p>${content}</p>
-    <p>${creatorName}</p>
-    <img src="${image}" alt="">
-
-    <hr>
-    <div style="display:flex; justify-content:space-between;">
-      <button class="btn-remove">삭제</button>
-      <button class="btn-modify" id="btn-modify">수정</button>
+    <div style="width:300px; margin-bottom:3rem;" data-no="${no}">
+      <em>${no}</em>
+      <em>${title}</em>
+      <hr>
+      <h3>${content}</h3>
+      <p>${content}</p>
+      <p>${creatorName}</p>
+      <img src="${image}" alt="">
+  
+      <hr>
+      <div style="display:flex; justify-content:space-between;">
+        <button class="btn-remove">삭제</button>
+        <button class="btn-modify" id="btn-modify">수정</button>
+      </div>
     </div>
-  </div>
-`;
+  `;
   return tr; // 변수 이름 수정
 }
+
+// 게시물 클릭시 visible
 document.addEventListener("DOMContentLoaded", function () {
   const signinButton = document.querySelector(".signinButton");
   const signupButton = document.querySelector(".signupButton");
@@ -45,7 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-// 게시물 클릭시 visible
 
 const boards = document.querySelectorAll(
   ".main-list, .post-list, .membershipboard, .fetimageboard, .hospitalboard, .groupbuying, .preuser, .missing"
@@ -178,26 +184,76 @@ document.addEventListener("click", async function (event) {
     }
   }
 });
-// 수정
+//   수정
 document.addEventListener("DOMContentLoaded", function () {
-  const modifyButtons = document.querySelectorAll(".btn-modify");
+  // 모달 변수
+  const modalModify = document.querySelector(".modal-modify");
+  const modalNo = document.getElementById("modalNo");
+  const modalTitleInput = document.getElementById("modalTitleInput");
+  const modalContentInput = document.getElementById("modalContentInput");
+  const modalSaveBtn = document.getElementById("modalSaveBtn");
+  const modalCloseBtn = document.getElementById("modalCloseBtn");
 
-  modifyButtons.forEach((button) => {
-    button.addEventListener("click", function (event) {
-      const card = event.target.closest("div[data-no]");
-      const no = card.getAttribute("data-no");
-      const title = card.querySelector("em").innerText;
-      const content = card.querySelector("h3").innerText;
-
-      // 모달에 데이터 바인딩
-      document.getElementById("modalNo").value = no;
-      document.getElementById("modalTitleInput").value = title;
-      document.getElementById("modalContentInput").value = content;
-
-      // 모달 표시
-      document.querySelector(".modal-modify").style.display = "block";
-    });
+  // 수정 버튼 클릭 이벤트
+  document.addEventListener("click", function (event) {
+    if (event.target.classList.contains("btn-modify")) {
+      const cardDiv = event.target.closest("[data-no]");
+      modalNo.value = cardDiv.getAttribute("data-no");
+      modalTitleInput.value =
+        cardDiv.querySelector("em:nth-child(2)").textContent;
+      modalContentInput.value =
+        cardDiv.querySelector("p:nth-child(5)").textContent;
+      modalModify.style.display = "block";
+    }
   });
 
-  // 모달 닫기 로직, 모달 저장 로직 등을 추가
+  // 저장 버튼 클릭 이벤트
+  modalSaveBtn.addEventListener("click", function () {
+    const cardDiv = document.querySelector(`[data-no="${modalNo.value}"]`);
+    if (cardDiv) {
+      cardDiv.querySelector("em:nth-child(2)").textContent =
+        modalTitleInput.value;
+      cardDiv.querySelector("h3:nth-child(4)").textContent =
+        modalContentInput.value;
+      cardDiv.querySelector("p:nth-child(5)").textContent =
+        modalContentInput.value;
+      modalModify.style.display = "none"; // 모달 닫기
+    }
+    // 서버에 PUT 요청 전송
+    fetch(`http://localhost:8080/posts/modifyPost?no=${modalNo.value}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: modalTitleInput.value,
+        content: modalContentInput.value,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+  });
+
+  // 닫기 버튼 클릭 이벤트
+  modalCloseBtn.addEventListener("click", function () {
+    modalModify.style.display = "none";
+  });
+
+  // 모달 바깥 클릭 이벤트 (이전 코드에 추가)
+  window.addEventListener("click", function (event) {
+    // ... (이전 코드)
+    if (event.target === modalModify) {
+      modalModify.style.display = "none";
+    }
+  });
 });

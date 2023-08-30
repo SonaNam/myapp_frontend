@@ -20,13 +20,14 @@
         background-color: rgba(0, 0, 0, 0.5);
         z-index: 999;
       }
-      .modal1 {
+      .modal1,
+      .modal-modify {
         display: none;
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: 100vw;
         background-color: rgba(0, 0, 0, 0.5);
         z-index: 999;
       }
@@ -55,12 +56,11 @@
         align-items: center;
         overflow-y: auto;
       }
-      .modal1-content {
+      .modal1-content,
+      .modal-modify-content {
         text-align: center;
         background-color: white;
-        width: 100%;
-        height: 50vw;
-        max-width: 45%;
+        width: 40vw;
         margin: 10% auto;
         padding: 2%;
         border-radius: 5px;
@@ -314,6 +314,16 @@
         display: inline-block;
         font-size: 0.8vw;
       }
+      #add_post_btn {
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 2% 2%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 0.8vw;
+      }
     </style>
   </head>
   <body>
@@ -335,338 +345,316 @@
           </h1>
         </a>
       </div>
-      <div id="top-menu-container">
-        <!--상단 모아보기메뉴 (추가테이블체크)-->
-        <a class="top-menu-item1" href="">전체글보기</a>
-        <a class="top-menu-item2" href="">이미지모아보기</a>
-      </div>
     </div>
     <hr />
-    <div class="content-area">
-      <div class="skin-1080 f">
-        <br />
-        <div class="cafe-info-action">
-          <div class="cafe-info-data">
-            <div class="Manager-container">
-              <div class="Manager-item1">
-                <div class="Manager-item2">
-                  <!--manager창이미지및정보-->
-                  <h4>카페정보</h4>
-                  <div>
-                    <img
-                      id="info-image"
-                      src="../image/IMG_7729.jpg"
-                      alt="IMG-7729"
-                    />
-                    <ul style="font-family: fantasy">
-                      <p>Sinyukan</p>
-                      <p>manager</p>
-                      <p>since 2023.08.08</p>
-                    </ul>
-                  </div>
+    <br />
+    <div class="Manager-container">
+      <div class="Manager-item1">
+        <div class="Manager-item2">
+          <!--manager창이미지및정보-->
+          <h4>카페정보</h4>
+          <div>
+            <img id="info-image" src="../image/IMG_7729.jpg" alt="IMG-7729" />
+            <ul style="font-family: fantasy">
+              <p>Sinyukan</p>
+              <p>manager</p>
+              <p>since 2023.08.08</p>
+            </ul>
+          </div>
+        </div>
+        <div class="cafe-modal">
+          <br /><button class="signinButton">로그인</button>
+          <button class="signupButton">회원가입</button>
+          <div class="modal">
+            <div class="modal-content">
+              <!--모달창-->
+              <form>
+                <h2>로 그 인</h2>
+                <div>
+                  <input type="text" placeholder="id" />
+                  <br /><input type="password" placeholder="Password" />
                 </div>
-                <div class="cafe-modal">
-                  <br /><button class="signinButton">로그인</button>
-                  <button class="signupButton">회원가입</button>
-                  <div class="modal">
-                    <div class="modal-content">
-                      <!--모달창-->
-                      <form>
-                        <h2>로 그 인</h2>
-                        <div>
-                          <input type="text" placeholder="id" />
-                          <br /><input type="password" placeholder="Password" />
-                        </div>
-                        <button class="sign-in-modalbutton" type="submit">
-                          Sign in
-                        </button>
-                        <button class="sign-up-modalbutton" type="submit">
-                          Sign Up
-                        </button>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="signup-modal">
-                    <div class="signup-modal-content">
-                      <!--회원가입 모달창-->
-                      <form>
-                        <h2>Signup</h2>
-                        <div>
-                          <input type="text" placeholder="id" />
-                          <br />
-                          <input type="password" placeholder="password" />
-                          <br />
-                          <input type="text" placeholder="nickname" />
-                          <br />
-                          <input type="text" placeholder="phone" />
-                          <br />
-                          <input type="text" placeholder="email" />
-                        </div>
-                      </form>
-                    </div>
-                  </div>
+                <button class="sign-in-modalbutton" type="submit">
+                  Sign in
+                </button>
+                <button class="sign-up-modalbutton" type="submit">
+                  Sign Up
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="signup-modal">
+            <div class="signup-modal-content">
+              <!--회원가입 모달창-->
+              <form>
+                <h2>Signup</h2>
+                <div>
+                  <input type="text" placeholder="id" />
+                  <br />
+                  <input type="password" placeholder="password" />
+                  <br />
+                  <input type="text" placeholder="nickname" />
+                  <br />
+                  <input type="text" placeholder="phone" />
+                  <br />
+                  <input type="text" placeholder="email" />
                 </div>
-                <hr />
-                <div class="cafe-manu-list">
-                  <!--announcement 공지사항-->
-                  <h3>
-                    <span title="공지및 가입인사">공지 및 가입인사</span>
-                  </h3>
-                  <hr />
-                  <div><a href="" data-target="post-list">🔴 공지사항</a></div>
-                  <div>
-                    <a href="" data-target="membershipboard">✔ 가입인사""</a>
-                  </div>
-                  <hr />
-                  <h3>
-                    <span title="자유게시판">자 유 게 시 판</span>
-                  </h3>
-                  <hr />
-                  <div>
-                    <!--free-board 자유게시판-->
-                    <div>
-                      <a href="" data-target="fetimageboard"
-                        >🐕우리아이자랑게시판</a
-                      >
-                    </div>
-                    <div><a href="">여긴뭘넣지</a></div>
-                    <div>
-                      <a href="" data-target="hospitalboard">"" 병원정보</a>
-                    </div>
-                  </div>
-                  <div>
-                    <hr />
-                    <h3>
-                      <span title="공동구매 및 체험단신청"
-                        >공동구매 및 체험단신청</span
-                      >
-                    </h3>
-                    <hr />
-                  </div>
-                  <div>
-                    <!--group-purchase 공동구매-->
-                    <div>
-                      <a href="" data-target="groupbuying">🐶링크 공동구매</a>
-                    </div>
-                    <div><a href="" data-target="preuser">" 체험단신청</a></div>
-                    <div><a href="">" 여긴뭘넣을까</a></div>
-                  </div>
-                  <div>
-                    <hr />
-                    <h3>
-                      <span title="우리아이찾아주세요">우리아이찾아주세요</span>
-                    </h3>
-                    <hr />
-                    <div>
-                      <!--missing 실종-->
-                      <div>
-                        <a href="" data-target="missing">👮‍♂️링크 실종신고</a>
-                      </div>
-                      <div><a href="">링크 임보</a></div>
-                      <div><a href="">링크 제보</a></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="Manager-item2">
-                <div class="main-list">
-                  <h2>체험단 공동구매 !</h2>
-                  <a href="https://www.instagram.com/bpet_heeya/"
-                    ><img
-                      src="../image/230817_러블링_목걸이_체험단_배너_600.jpg"
-                  /></a>
-                  <a href="https://www.instagram.com/gentlwuff/"
-                    ><img src="../image/230816_젠틀우프_체험단_배너_600.jpg"
-                  /></a>
-                  <a href="https://www.instagram.com/brgoggan_1993/"
-                    ><img src="../image/230807_반려곳간_체험단_배너_600.jpg"
-                  /></a>
-                  <a
-                    href="https://www.hanwharesort.co.kr/irsweb/resort3/reserve/contract.do?contractNo=20002191"
-                    ><img
-                      src="../image/230802_한화리조트_멍패커룸_소문내기_배너_600.jpg"
-                  /></a>
-                  <a href="https://harimpetfood.com/surl/P/1986"
-                    ><img
-                      src="../image/230801_하림펫_더리얼_베스트픽_아웃링크_배너_600.jpg"
-                  /></a>
-                  <a
-                    href="https://store.meritzfire.com/pet/product.do#!/contractPopup"
-                    ><img
-                      src="../image/230807_메리츠화재_아웃링크_배너_600x97.jpg"
-                  /></a>
-                  <a href=""
-                    ><img
-                      src="../image/매달_몽도르프_응원_스타벅스_배너_600.png"
-                  /></a>
-                </div>
-                <div class="post-list">
-                  <h2>공지사항</h2>
-                  <table class="post-item">
-                    <tr id="normalTableTitle">
-                      <th scope="col">
-                        <span>제목</span>
-                      </th>
-                      <th>작성자</th>
-                      <th>작성일</th>
-                      <th>조회</th>
-                      <th>좋아요</th>
-                    </tr>
-                    <tbody>
-                      <tr></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="membershipboard">
-                  <!--가입인사-->
-                  <h2>가입인사</h2>
-                  <table class="post-item">
-                    <tr id="normalTableTitle">
-                      <th scope="col">
-                        <span>제목</span>
-                      </th>
-                      <th>작성자</th>
-                      <th>작성일</th>
-                      <th>조회</th>
-                      <th>좋아요</th>
-                    </tr>
-                    <tbody>
-                      <tr></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="fetimageboard">
-                  <!--오렌지-->
-                  <h2>우리아이자랑게시판</h2>
-                  <table class="post-item">
-                    <tbody>
-                      <tr id="normalTableTitle">
-                        <th scope="col">
-                          <span>제목</span>
-                        </th>
-                        <th>작성자</th>
-                        <th>작성일</th>
-                        <th>조회</th>
-                        <th>좋아요</th>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <footer>
-                    <button id="postmodal">게시물작성하기</button>
-                  </footer>
-                </div>
-                <div class="modal1">
-                  <div class="modal1-content">
-                    <!--모달창-->
-                    <form>
-                      <h2>posting</h2>
-                      <div>
-                        <input
-                          type="text"
-                          style="height: 2.6em; margin: 5.8%"
-                          placeholder="제목을작성해주세요."
-                          id="title"
-                        />
-                        <br /><textarea
-                          cols="70"
-                          rows="25"
-                          id="text_content"
-                        ></textarea>
-                        <input
-                          type="image"
-                          style="width: 200px"
-                          accept="image/* "
-                        />
-                        <br /><input type="file" id="img" />
-                      </div>
-                      <button id="add_post_btn">작성하기</button>
-                    </form>
-                  </div>
-                </div>
-
-                <div class="hospitalboard">
-                  <!--노랑-->
-                  <h2>병원정보</h2>
-                  <table class="post-item">
-                    <tr id="normalTableTitle">
-                      <th scope="col">
-                        <span>제목</span>
-                      </th>
-                      <th>작성자</th>
-                      <th>작성일</th>
-                      <th>조회</th>
-                      <th>좋아요</th>
-                    </tr>
-                    <tbody>
-                      <tr></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="groupbuying">
-                  <!--초록-->
-                  <h2>공동구매</h2>
-                  <table class="post-item">
-                    <tr id="normalTableTitle">
-                      <th scope="col">
-                        <span>제목</span>
-                      </th>
-                      <th>작성자</th>
-                      <th>작성일</th>
-                      <th>조회</th>
-                      <th>좋아요</th>
-                    </tr>
-                    <tbody>
-                      <tr></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="preuser">
-                  <!--보라색-->
-                  <h2>체험단</h2>
-                  <table class="post-item">
-                    <tr id="normalTableTitle">
-                      <th scope="col">
-                        <span>제목</span>
-                      </th>
-                      <th>작성자</th>
-                      <th>작성일</th>
-                      <th>조회</th>
-                      <th>좋아요</th>
-                    </tr>
-                    <tbody>
-                      <tr></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="missing">
-                  <!--회색-->
-                  <h2>실종신고</h2>
-                  <table class="post-item">
-                    <tr id="normalTableTitle">
-                      <th scope="col">
-                        <span>제목</span>
-                      </th>
-                      <th>작성자</th>
-                      <th>작성일</th>
-                      <th>조회</th>
-                      <th>좋아요</th>
-                    </tr>
-                    <tbody>
-                      <tr></tr>
-                    </tbody>
-                  </table>
-                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="cafe-manu-list">
+          <!--announcement 공지사항-->
+          <h3>
+            <span title="공지및 가입인사">공지 및 가입인사</span>
+          </h3>
+          <hr />
+          <div><a href="" data-target="post-list">🔴 공지사항</a></div>
+          <div>
+            <a href="" data-target="membershipboard">✔ 가입인사</a>
+          </div>
+          <hr />
+          <h3>
+            <span title="자유게시판">자 유 게 시 판</span>
+          </h3>
+          <hr />
+          <div>
+            <!--free-board 자유게시판-->
+            <div>
+              <a href="" data-target="fetimageboard">🐕우리아이자랑게시판</a>
+            </div>
+            <div>
+              <a href="" data-target="hospitalboard"> 병원정보</a>
+            </div>
+          </div>
+          <div>
+            <hr />
+            <h3>
+              <span title="공동구매 및 체험단신청">공동구매 및 체험단신청</span>
+            </h3>
+            <hr />
+          </div>
+          <div>
+            <!--group-purchase 공동구매-->
+            <div>
+              <a href="" data-target="groupbuying">🐶링크 공동구매</a>
+            </div>
+            <div><a href="" data-target="preuser"> 체험단신청</a></div>
+          </div>
+          <div>
+            <hr />
+            <h3>
+              <span title="우리아이찾아주세요">우리아이찾아주세요</span>
+            </h3>
+            <hr />
+            <div>
+              <!--missing 실종-->
+              <div>
+                <a href="" data-target="missing">👮‍♂️링크 실종신고</a>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="Manager-item2">
+        <div class="main-list">
+          <h2>체험단 공동구매 !</h2>
+          <a href="https://www.instagram.com/bpet_heeya/"
+            ><img src="../image/230817_러블링_목걸이_체험단_배너_600.jpg"
+          /></a>
+          <a href="https://www.instagram.com/gentlwuff/"
+            ><img src="../image/230816_젠틀우프_체험단_배너_600.jpg"
+          /></a>
+          <a href="https://www.instagram.com/brgoggan_1993/"
+            ><img src="../image/230807_반려곳간_체험단_배너_600.jpg"
+          /></a>
+          <a
+            href="https://www.hanwharesort.co.kr/irsweb/resort3/reserve/contract.do?contractNo=20002191"
+            ><img
+              src="../image/230802_한화리조트_멍패커룸_소문내기_배너_600.jpg"
+          /></a>
+          <a href="https://harimpetfood.com/surl/P/1986"
+            ><img
+              src="../image/230801_하림펫_더리얼_베스트픽_아웃링크_배너_600.jpg"
+          /></a>
+          <a href="https://store.meritzfire.com/pet/product.do#!/contractPopup"
+            ><img src="../image/230807_메리츠화재_아웃링크_배너_600x97.jpg"
+          /></a>
+          <a href=""
+            ><img src="../image/매달_몽도르프_응원_스타벅스_배너_600.png"
+          /></a>
+        </div>
+        <div class="post-list">
+          <h2>공지사항</h2>
+          <table class="post-item">
+            <tr id="normalTableTitle">
+              <th scope="col">
+                <span>제목</span>
+              </th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회</th>
+              <th>좋아요</th>
+            </tr>
+            <tbody>
+              <tr></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="membershipboard">
+          <!--가입인사-->
+          <h2>가입인사</h2>
+          <table class="post-item">
+            <tr id="normalTableTitle">
+              <th scope="col">
+                <span>제목</span>
+              </th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회</th>
+              <th>좋아요</th>
+            </tr>
+            <tbody>
+              <tr></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="fetimageboard">
+          <!--오렌지-->
+          <h2>우리아이자랑게시판</h2>
+          <table class="post-item">
+            <tbody>
+              <tr id="normalTableTitle">
+                <th scope="col">
+                  <span>제목</span>
+                </th>
+                <th>작성자</th>
+                <th>작성일</th>
+                <th>조회</th>
+                <th>좋아요</th>
+              </tr>
+            </tbody>
+          </table>
+          <footer>
+            <button id="postmodal">게시물작성하기</button>
+          </footer>
+          <form class="paging">
+            <input placeholder="입력란" />
+            <button>검색</button>
+            <button>초기화</button>
+            &nbsp;&nbsp;&nbsp;
+            <button>이전</button>
+            <button>다음</button>
+          </form>
+        </div>
+        <div class="modal1">
+          <div class="modal1-content">
+            <!--모달창-->
+            <form>
+              <h2>posting</h2>
+              <div>
+                <input
+                  type="text"
+                  style="height: 2.6em; margin: 5.8%"
+                  placeholder="제목을작성해주세요."
+                  id="title"
+                />
+                <br /><textarea
+                  style="width: 25vw"
+                  cols="40"
+                  rows="20"
+                  id="text_content"
+                ></textarea>
+                <br /><input type="file" id="img" />
+              </div>
+              <br />
+              <button id="add_post_btn">작성하기</button>
+            </form>
+          </div>
+        </div>
+        <div class="hospitalboard">
+          <h2>병원정보</h2>
+          <table class="post-item">
+            <tr id="normalTableTitle">
+              <th scope="col">
+                <span>제목</span>
+              </th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회</th>
+              <th>좋아요</th>
+            </tr>
+            <tbody>
+              <tr></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="groupbuying">
+          <h2>공동구매</h2>
+          <table class="post-item">
+            <tr id="normalTableTitle">
+              <th scope="col">
+                <span>제목</span>
+              </th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회</th>
+              <th>좋아요</th>
+            </tr>
+            <tbody>
+              <tr></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="preuser">
+          <h2>체험단</h2>
+          <table class="post-item">
+            <tr id="normalTableTitle">
+              <th scope="col">
+                <span>제목</span>
+              </th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회</th>
+              <th>좋아요</th>
+            </tr>
+            <tbody>
+              <tr></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="missing">
+          <h2>실종신고</h2>
+          <table class="post-item">
+            <tr id="normalTableTitle">
+              <th scope="col">
+                <span>제목</span>
+              </th>
+              <th>작성자</th>
+              <th>작성일</th>
+              <th>조회</th>
+              <th>좋아요</th>
+            </tr>
+            <tbody>
+              <tr></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <div class="modal-modify">
       <div class="modal-modify-content">
-        <input type="hidden" id="modalNo" />
+        <input type="text" id="modalNo" />
         <label> Title: <input type="text" id="modalTitleInput" /> </label>
-        <textarea id="modalContentInput"></textarea>
+        <textarea
+          id="modalContentInput"
+          style="width: 25vw"
+          cols="40"
+          rows="20"
+          id="text_content"
+        ></textarea>
+        <input type="file" id="img" />
         <button id="modalSaveBtn">저장</button>
         <button id="modalCloseBtn">닫기</button>
       </div>
