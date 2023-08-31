@@ -3,10 +3,11 @@ let isLastPage = false; // 마지막 페이지 인지 여부
 const PAGE_SIZE = 10; // 고정된 페이지 사이즈
 let currentQuery = ""; // 현재 검색 키워드
 
-function cardTemplate(no, title, content, creatorName, image) {
+function cardTemplate(no, title, content, creatorName, image, boardValue) {
   const tr = document.createElement("div");
+  tr.dataset.value = boardValue;
   tr.innerHTML = `
-    <div style="width:300px; margin-bottom:3rem;" data-no="${no}">
+    <div style="width:300px; margin-bottom:3rem;" data-no="${no}" dt>
       <em>${no}</em>
       <em>${title}</em>
       <hr>
@@ -85,13 +86,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  const postmodal = document.getElementById("postmodal");
+  // 게시물작성
   const modal1 = document.querySelector(".modal1");
-  postmodal.addEventListener("click", function () {
-    console.log(postmodal);
-    modal1.style.display = "block";
+  const postmodalButtons = document.querySelectorAll(".postmodal");
+  postmodalButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      modal1.style.display = "block";
+    });
   });
-
   window.addEventListener("click", function (event) {
     if (event.target == modal1) {
       modal1.style.display = "none";
@@ -107,15 +109,17 @@ const fetimageboard = document.querySelector(".fetimageboard");
 console.log(img);
 console.log(title);
 console.log(text_content);
-// 게시물
+//모달창 작성 클릭하면 보내지기------------------------------------------------------
 post_btn.addEventListener("click", async (e) => {
   e.preventDefault();
+  const myfat = document.querySelector("#myfat");
 
+  // console.log(myfat.id + "check------------");
   const reader = new FileReader();
   reader.addEventListener("load", async (e) => {
     const img = e.target.result;
 
-    const response = await fetch("http://localhost:8080/posts/addPost", {
+    const response = await fetch("http://localhost:8080/posts", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -124,6 +128,7 @@ post_btn.addEventListener("click", async (e) => {
         title: title.value,
         content: text_content.value,
         image: img,
+        boardValue: myfat.id,
       }),
     });
     const result = await response.json();
@@ -134,33 +139,115 @@ post_btn.addEventListener("click", async (e) => {
         data.title,
         data.content,
         data.creatorName,
-        data.image
+        data.image,
+        data.boardValue
       )
     );
   });
 
   reader.readAsDataURL(file.files[0]);
 
-  // 버튼 이벤트
+  //우리아이 게시판 클릭하면 get------------------------------------------------------
 });
-
-(async () => {
-  const response = await fetch("http://localhost:8080/posts/getPost");
+const my_fat_post = document.getElementById("my_fat_post");
+my_fat_post.addEventListener("click", async () => {
+  const myfat = "myfat";
+  const response = await fetch(`http://localhost:8080/posts?post=${myfat}`);
 
   const result = await response.json();
 
   result.forEach((item) => {
-    fetimageboard.prepend(
+    // 이미 해당 게시물이 있는지 확인
+    const existingPost = fetimageboard.querySelector(`[data-no="${item.no}"]`);
+    if (!existingPost) {
+      // 존재하지 않으면 새 게시물 추가
+      fetimageboard.prepend(
+        cardTemplate(
+          item.no,
+          item.title,
+          item.content,
+          item.creatorName,
+          item.image,
+          item.boardValue
+        )
+      );
+    }
+  });
+});
+
+// 병원모달
+document.addEventListener("DOMContentLoaded", function () {
+  const modalhos = document.querySelector(".modal_hos");
+  const hosmodalbtn = document.querySelector(".hosmodal");
+  const closeBtn = document.getElementById("add_hos_btn"); // 작성하기 버튼을 닫기 버튼으로 사용합니다.
+
+  // 버튼을 클릭하면 모달 열기
+  hosmodalbtn.onclick = function () {
+    modalhos.style.display = "block";
+  };
+
+  // 작성하기 버튼을 클릭하면 모달 닫기
+  closeBtn.onclick = function (event) {
+    event.preventDefault(); // 폼 제출 방지
+    modalhos.style.display = "none";
+  };
+
+  // 모달 외부를 클릭하면 모달 닫기
+  window.onclick = function (event) {
+    if (event.target == modalhos) {
+      modalhos.style.display = "none";
+    }
+  };
+});
+
+// 병원
+const hosbtn = document.querySelector("#add-hos-btn");
+const hostitle = document.querySelector("#hostitle");
+const textcontent = document.querySelector("#hos-text-content");
+const hosfile = document.querySelector("#hos-img");
+const hospitalboard = document.querySelector(".hospitalboard");
+console.log(hosfile);
+console.log(hostitle);
+console.log(textcontent);
+//모달창 작성 클릭하면 보내지기------------------------------------------------------
+
+hosbtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  const hospital = document.querySelector("#hospital");
+
+  // console.log(myfat.id + "check------------");
+  const reader = new FileReader();
+  reader.addEventListener("load", async (e) => {
+    const hosfile = e.target.result;
+
+    const response = await fetch("http://localhost:8080/posts", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        title: hostitle.value,
+        content: textcontent.value,
+        image: hosfile,
+        boardValue: hospital.id,
+      }),
+    });
+    const result = await response.json();
+    const { data } = result;
+    hospitalboard.prepend(
       cardTemplate(
-        item.no,
-        item.title,
-        item.content,
-        item.creatorName,
-        item.image
+        data.no,
+        data.title,
+        data.content,
+        data.creatorName,
+        data.image,
+        data.boardValue
       )
     );
   });
-})();
+});
+
+reader.readAsDataURL(file.files[0]);
 
 // 삭제 기능 추가
 document.addEventListener("click", async function (event) {

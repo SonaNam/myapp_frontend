@@ -21,7 +21,8 @@
         z-index: 999;
       }
       .modal1,
-      .modal-modify {
+      .modal-modify,
+      .modal_hos {
         display: none;
         position: fixed;
         top: 0;
@@ -41,6 +42,9 @@
         background-color: rgba(0, 0, 0, 0.5);
         z-index: 999;
       }
+      .modal_hos {
+        display: none;
+      }
       .modal-content {
         text-align: center;
         background-color: white;
@@ -57,7 +61,8 @@
         overflow-y: auto;
       }
       .modal1-content,
-      .modal-modify-content {
+      .modal-modify-content,
+      .modal-content-hos {
         text-align: center;
         background-color: white;
         width: 40vw;
@@ -342,21 +347,21 @@
   <body>
     <div class="cafe-body-skin">
       <div class="front-cafe">
-        <a
+        <!-- <a
           name="myCafeUrlLink"
           onclick="updateMoveMenu()"
           href="http://127.0.0.1:5500/index.html"
           target="cafe_main"
-        >
-          <img
-            class="top-image"
-            src="https://i.ibb.co/x80M31D/22.png"
-            alt="반려견 훈련 교육법, 강아지 종류 유기견 입양방법"
-          />
-          <h1>
-            <span class="main_image_text">PetFrends</span>
-          </h1>
-        </a>
+        > -->
+        <img
+          class="top-image"
+          src="https://i.ibb.co/x80M31D/22.png"
+          alt="반려견 훈련 교육법, 강아지 종류 유기견 입양방법"
+        />
+        <h1>
+          <span class="main_image_text">PetFrends</span>
+        </h1>
+        <!-- </a> -->
       </div>
     </div>
     <hr />
@@ -434,7 +439,7 @@
           <hr />
           <div>
             <!--free-board 자유게시판-->
-            <div>
+            <div id="my_fat_post">
               <a href="" data-target="fetimageboard">🐕우리아이자랑게시판</a>
             </div>
             <div>
@@ -511,16 +516,27 @@
           </table>
         </div>
         <div class="membershipboard">
-          <!--가입인사-->
-          <h2>가입인사</h2>
+          <div class="Post-title">
+            <h2>가입인사</h2>
+          </div>
           <table class="post-item">
-            <tr id="normalTableTitle">
-              <th scope="col"></th>
-            </tr>
             <tbody>
-              <tr></tr>
+              <tr id="normalTableTitle">
+                <th scope="col"></th>
+              </tr>
             </tbody>
           </table>
+          <footer>
+            <button class="postmodal">게시물작성하기</button>
+          </footer>
+          <form class="post-paging">
+            <input class="txtQuery" placeholder="입력란" />
+            <button class="btnSearch">검색</button>
+            <button class="btnReset">초기화</button>
+            &nbsp;&nbsp;&nbsp;
+            <button class="btnPrev">이전</button>
+            <button class="btnNext">다음</button>
+          </form>
         </div>
         <div class="fetimageboard">
           <div class="Post-title">
@@ -534,7 +550,7 @@
             </tbody>
           </table>
           <footer>
-            <button id="postmodal">게시물작성하기</button>
+            <button class="postmodal">게시물작성하기</button>
           </footer>
           <form class="post-paging">
             <input class="txtQuery" placeholder="입력란" />
@@ -546,7 +562,7 @@
           </form>
         </div>
         <div class="modal1">
-          <div class="modal1-content">
+          <div class="modal1-content" id="myfat">
             <!--모달창-->
             <form>
               <h2>posting</h2>
@@ -571,48 +587,115 @@
           </div>
         </div>
         <div class="hospitalboard">
-          <h2>병원정보</h2>
+          <div class="Post-title">
+            <h2>병원정보</h2>
+          </div>
           <table class="post-item">
             <tr id="normalTableTitle">
               <th scope="col"></th>
             </tr>
-            <tbody>
-              <tr></tr>
-            </tbody>
           </table>
+          <footer>
+            <button class="hosmodal">게시물작성하기</button>
+          </footer>
+          <form class="post-paging">
+            <input class="txtQuery" placeholder="입력란" />
+            <button class="btnSearch">검색</button>
+            <button class="btnReset">초기화</button>
+            &nbsp;&nbsp;&nbsp;
+            <button class="btnPrev">이전</button>
+            <button class="btnNext">다음</button>
+          </form>
+        </div>
+        <div class="modal_hos">
+          <div class="modal-content-hos" id="hospital">
+            <!--모달창-->
+            <form>
+              <h2>posting</h2>
+              <div>
+                <input
+                  type="text"
+                  style="height: 2.6em; margin: 5.8%"
+                  placeholder="제목을작성해주세요."
+                  id="hostitle"
+                />
+                <br /><textarea
+                  style="width: 25vw"
+                  cols="40"
+                  rows="20"
+                  id="hos-text-content"
+                ></textarea>
+                <br /><input type="file" id="hos-img" />
+              </div>
+              <br />
+              <button id="add-hos-btn">작성하기</button>
+            </form>
+          </div>
         </div>
         <div class="groupbuying">
-          <h2>공동구매</h2>
+          <div class="Post-title">
+            <h2>공동구매</h2>
+          </div>
           <table class="post-item">
             <tr id="normalTableTitle">
               <th scope="col"></th>
             </tr>
-            <tbody>
-              <tr></tr>
-            </tbody>
           </table>
+          <footer>
+            <button id="postmodal">게시물작성하기</button>
+          </footer>
+          <form class="post-paging">
+            <input class="txtQuery" placeholder="입력란" />
+            <button class="btnSearch">검색</button>
+            <button class="btnReset">초기화</button>
+            &nbsp;&nbsp;&nbsp;
+            <button class="btnPrev">이전</button>
+            <button class="btnNext">다음</button>
+          </form>
         </div>
         <div class="preuser">
-          <h2>체험단</h2>
+          <div class="Post-title">
+            <h2>체험단</h2>
+          </div>
           <table class="post-item">
             <tr id="normalTableTitle">
               <th scope="col"></th>
             </tr>
-            <tbody>
-              <tr></tr>
-            </tbody>
+            <tbody></tbody>
           </table>
+
+          <footer>
+            <button id="postmodal">게시물작성하기</button>
+          </footer>
+          <form class="post-paging">
+            <input class="txtQuery" placeholder="입력란" />
+            <button class="btnSearch">검색</button>
+            <button class="btnReset">초기화</button>
+            &nbsp;&nbsp;&nbsp;
+            <button class="btnPrev">이전</button>
+            <button class="btnNext">다음</button>
+          </form>
         </div>
         <div class="missing">
-          <h2>실종신고</h2>
+          <div class="Post-title">
+            <h2>실종신고</h2>
+          </div>
           <table class="post-item">
             <tr id="normalTableTitle">
               <th scope="col"></th>
             </tr>
-            <tbody>
-              <tr></tr>
-            </tbody>
           </table>
+          <footer>
+            <button id="postmodal">게시물작성하기</button>
+          </footer>
+          <form class="post-paging">
+            <input class="txtQuery" placeholder="입력란" />
+            <button class="btnSearch">검색</button>
+            <button class="btnReset">초기화</button>
+            &nbsp;&nbsp;&nbsp;
+            <button class="btnPrev">이전</button>
+            <button class="btnNext">다음</button>
+          </form>
         </div>
       </div>
     </div>
