@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const postmodal = document.getElementById("postmodal");
   const modal1 = document.querySelector(".modal1");
   postmodal.addEventListener("click", function () {
+    console.log(postmodal);
     modal1.style.display = "block";
   });
 
@@ -106,7 +107,7 @@ const fetimageboard = document.querySelector(".fetimageboard");
 console.log(img);
 console.log(title);
 console.log(text_content);
-
+// 게시물
 post_btn.addEventListener("click", async (e) => {
   e.preventDefault();
 

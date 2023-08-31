@@ -326,13 +326,16 @@
       }
       .fetimageboard {
         display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 가로로 3개의 게시물 */
+        grid-template-columns: repeat(3, 1fr);
         gap: 10px;
       }
-      .fetimageboard h2 {
-        position: absolute;
-        top: 0;
-        left: 0;
+      .Post-title {
+        box-shadow: 0px 4px 12px rgba(5, 4, 5, 0.15);
+        position: fixed;
+        top: 0px;
+        background-color: orange;
+        color: white;
+        border-radius: 8vw;
       }
     </style>
   </head>
@@ -496,13 +499,14 @@
           /></a>
         </div>
         <div class="post-list">
-          <h2>공지사항</h2>
+          <div class="Post-title">
+            <h2>공지사항</h2>
+          </div>
           <table class="post-item">
-            <tr id="normalTableTitle">
-              <th scope="col"></th>
-            </tr>
             <tbody>
-              <tr></tr>
+              <tr id="normalTableTitle">
+                <th scope="col"></th>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -532,13 +536,13 @@
           <footer>
             <button id="postmodal">게시물작성하기</button>
           </footer>
-          <form class="paging">
-            <input placeholder="입력란" />
-            <button>검색</button>
-            <button>초기화</button>
+          <form class="post-paging">
+            <input class="txtQuery" placeholder="입력란" />
+            <button class="btnSearch">검색</button>
+            <button class="btnReset">초기화</button>
             &nbsp;&nbsp;&nbsp;
-            <button>이전</button>
-            <button>다음</button>
+            <button class="btnPrev">이전</button>
+            <button class="btnNext">다음</button>
           </form>
         </div>
         <div class="modal1">
