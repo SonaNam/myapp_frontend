@@ -1,7 +1,6 @@
-let currentPage = 0; // 현재 페이지 번호
-let isLastPage = false; // 마지막 페이지 인지 여부
-const PAGE_SIZE = 10; // 고정된 페이지 사이즈
-let currentQuery = ""; // 현재 검색 키워드
+let currentPage = 0;
+let isLastPage = false;
+const PAGE_SIZE = 6;
 
 function cardTemplate(no, title, content, creatorName, image, boardValue) {
   const tr = document.createElement("div");
@@ -179,7 +178,7 @@ my_fat_post.addEventListener("click", async () => {
 document.addEventListener("DOMContentLoaded", function () {
   const modalhos = document.querySelector(".modal_hos");
   const hosmodalbtn = document.querySelector(".hosmodal");
-  const closeBtn = document.getElementById("add_hos_btn"); // 작성하기 버튼을 닫기 버튼으로 사용합니다.
+  const closeBtn = document.getElementById("add-hos-btn");
 
   // 버튼을 클릭하면 모달 열기
   hosmodalbtn.onclick = function () {
@@ -245,9 +244,35 @@ hosbtn.addEventListener("click", async (e) => {
       )
     );
   });
+  reader.readAsDataURL(hosfile.files[0]);
 });
+//병원 게시판 클릭하면 get------------------------------------------------------
 
-reader.readAsDataURL(file.files[0]);
+const hospost = document.getElementById("hospost");
+hospost.addEventListener("click", async () => {
+  const hospital = "hospital";
+  const response = await fetch(`http://localhost:8080/posts?post=${hospital}`);
+
+  const result = await response.json();
+
+  result.forEach((item) => {
+    // 이미 해당 게시물이 있는지 확인
+    const existingPost = hospitalboard.querySelector(`[data-no="${item.no}"]`);
+    if (!existingPost) {
+      // 존재하지 않으면 새 게시물 추가
+      hospitalboard.prepend(
+        cardTemplate(
+          item.no,
+          item.title,
+          item.content,
+          item.creatorName,
+          item.image,
+          item.boardValue
+        )
+      );
+    }
+  });
+});
 
 // 삭제 기능 추가
 document.addEventListener("click", async function (event) {
@@ -336,9 +361,8 @@ document.addEventListener("DOMContentLoaded", function () {
     modalModify.style.display = "none";
   });
 
-  // 모달 바깥 클릭 이벤트 (이전 코드에 추가)
+  // 모달 바깥 클릭 이벤트
   window.addEventListener("click", function (event) {
-    // ... (이전 코드)
     if (event.target === modalModify) {
       modalModify.style.display = "none";
     }

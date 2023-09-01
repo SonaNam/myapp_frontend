@@ -4,11 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    />
     <style>
       body {
         width: 100vw;
         margin: 0 auto;
         background-color: #fffff0;
+      }
+      h2 {
+        font-family: "Nanum Pen Script", cursive;
+        font-size: 4.2vw;
       }
       .modal {
         display: none;
@@ -20,6 +32,7 @@
         background-color: rgba(0, 0, 0, 0.5);
         z-index: 999;
       }
+
       .modal1,
       .modal-modify,
       .modal_hos {
@@ -32,6 +45,7 @@
         background-color: rgba(0, 0, 0, 0.5);
         z-index: 999;
       }
+
       .signup-modal {
         display: none;
         position: fixed;
@@ -42,24 +56,27 @@
         background-color: rgba(0, 0, 0, 0.5);
         z-index: 999;
       }
+
       .modal_hos {
         display: none;
       }
+      .modal-modify-content,
       .modal-content {
         text-align: center;
         background-color: white;
-        width: 100%;
-        height: 22vw;
-        max-width: 35%;
+        width: 25%;
+        max-width: 500px;
+        height: auto;
         margin: 10% auto;
         padding: 2%;
-        border-radius: 5px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         display: flex;
         flex-direction: column;
         align-items: center;
         overflow-y: auto;
       }
+
       .modal1-content,
       .modal-modify-content,
       .modal-content-hos {
@@ -75,6 +92,7 @@
         align-items: center;
         overflow-y: auto;
       }
+
       .signup-modal-content {
         text-align: center;
         background-color: white;
@@ -90,15 +108,18 @@
         align-items: center;
         overflow-y: auto;
       }
+
       .signup-modal-content input {
         height: 2.56em;
         margin: 5.8%;
       }
+
       .top-menu-item1 {
         padding: 5px;
         margin: 5px;
         font-size: 13px;
       }
+
       .top-menu-item2 {
         padding: 5px;
         margin: 5px;
@@ -108,6 +129,7 @@
       .Manager-container {
         display: flex;
       }
+
       .Manager-item2 a {
         margin: 10px;
       }
@@ -117,28 +139,26 @@
         padding: 2px;
         justify-content: left;
       }
+
       .cafe-manu-list div {
         margin-bottom: 10px;
       }
-      .top-image {
-        width: 100%;
-        height: 35vw;
-        background-image: url(../../IMG_7729.jpg);
-        background-attachment: fixed;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-      }
+
       .sign-in-modalbutton {
         background-color: orange;
         color: white;
         padding: 0.7em;
         margin: 3%;
       }
+      .modal-modify-content button {
+        padding: ;
+      }
+
       .sign-up-modalbutton {
         background-color: white;
         padding: 0.5em;
       }
+
       .signinButton {
         background-color: orange;
         color: white;
@@ -149,6 +169,7 @@
         height: 2.76em;
         margin: 5.8%;
       }
+
       .main_image_text {
         background-attachment: fixed;
         background-position: center;
@@ -156,6 +177,7 @@
         background-repeat: no-repeat;
         position: relative;
       }
+
       .top-image {
         width: 100%;
         height: 35vw;
@@ -166,6 +188,7 @@
         background-repeat: no-repeat;
         position: relative;
       }
+
       .main_image_text {
         position: absolute;
         font-family: cursive;
@@ -175,12 +198,14 @@
         color: beige;
         font-size: 5.9vw;
       }
+
       .Manager-item1 {
         background-color: #fffff0;
         width: 17%;
         padding: 2px;
         justify-content: left;
       }
+
       .Manager-item2 {
         background-color: #fffff0;
         width: 70%;
@@ -190,18 +215,22 @@
         justify-content: center;
         align-items: flex-start;
       }
+
       #info-image {
         text-align: left;
         width: 54%;
         margin-right: 10px;
       }
+
       .Manager-item2 p {
         margin: 1.8%;
         font-size: 0.9rem;
       }
+
       .Manager-item2 img {
         width: 100%;
       }
+
       hr {
         border-color: bisque;
         display: block;
@@ -213,13 +242,16 @@
         border-style: double;
         border-width: 0.4vw;
       }
+
       a {
         text-decoration: none;
         color: inherit;
       }
+
       button {
         cursor: pointer;
       }
+
       .main-list,
       .post-list,
       .membershipboard,
@@ -232,7 +264,9 @@
         top: 0;
         width: 100%;
         background-color: #fffff0;
+        text-align: center;
       }
+
       .main-list {
         /* z-index 1*/
         z-index: 1;
@@ -245,6 +279,7 @@
         margin: auto;
         position: absolute;
       }
+
       .post-list {
         position: absolute;
         background-color: #fffff0;
@@ -253,6 +288,7 @@
 
         height: 100%;
       }
+
       .membershipboard {
         position: absolute;
         background-color: #fffff0;
@@ -261,46 +297,19 @@
 
         height: 100%;
       }
-      .fetimageboard {
-        position: absolute;
-        background-color: #fffff0;
-        top: 0;
-        left: 0;
 
-        height: 100%;
-      }
-      .hospitalboard {
-        position: absolute;
-        background-color: #fffff0;
-        top: 0;
-        left: 0;
-
-        height: 100%;
-      }
-      .groupbuying {
-        position: absolute;
-        background-color: #fffff0;
-        top: 0;
-        left: 0;
-
-        height: 100%;
-      }
-      .preuser {
-        position: absolute;
-        background-color: #fffff0;
-        top: 0;
-        left: 0;
-
-        height: 100%;
-      }
+      .fetimageboard,
+      .hospitalboard,
+      .groupbuying,
+      .preuser,
       .missing {
         position: absolute;
         background-color: #fffff0;
         top: 0;
         left: 0;
-
         height: 100%;
       }
+
       .post-item {
         border: 0.5vw;
         width: 100%;
@@ -309,16 +318,18 @@
         background-color: fffff0;
         margin-bottom: 0px;
       }
+
       footer button {
         background-color: #4caf50;
         border: none;
         color: white;
-        padding: 1% 1%;
+        padding: 3% 3%;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 0.8vw;
       }
+
       #add_post_btn {
         background-color: #4caf50;
         border: none;
@@ -329,13 +340,16 @@
         display: inline-block;
         font-size: 0.8vw;
       }
-      .fetimageboard {
+
+      .fetimageboard,
+      .hospitalboard {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
       }
+
       .Post-title {
-        box-shadow: 0px 4px 12px rgba(5, 4, 5, 0.15);
+        box-shadow: 0px 4px 12px rgba(1, 8, 0.15);
         position: fixed;
         top: 0px;
         background-color: orange;
@@ -344,6 +358,7 @@
       }
     </style>
   </head>
+
   <body>
     <div class="cafe-body-skin">
       <div class="front-cafe">
@@ -442,8 +457,8 @@
             <div id="my_fat_post">
               <a href="" data-target="fetimageboard">🐕우리아이자랑게시판</a>
             </div>
-            <div>
-              <a href="" data-target="hospitalboard"> 병원정보</a>
+            <div id="hospost">
+              <a href="" data-target="hospitalboard"> 🚑병원정보</a>
             </div>
           </div>
           <div>
@@ -668,12 +683,12 @@
             <button id="postmodal">게시물작성하기</button>
           </footer>
           <form class="post-paging">
-            <input class="txtQuery" placeholder="입력란" />
-            <button class="btnSearch">검색</button>
-            <button class="btnReset">초기화</button>
+            <inputplaceholder ="입력란" />
+            <button>검색</button>
+            <button>초기화</button>
             &nbsp;&nbsp;&nbsp;
-            <button class="btnPrev">이전</button>
-            <button class="btnNext">다음</button>
+            <button>이전</button>
+            <button>다음</button>
           </form>
         </div>
         <div class="missing">
@@ -689,18 +704,19 @@
             <button id="postmodal">게시물작성하기</button>
           </footer>
           <form class="post-paging">
-            <input class="txtQuery" placeholder="입력란" />
-            <button class="btnSearch">검색</button>
-            <button class="btnReset">초기화</button>
+            <input placeholder="입력란" />
+            <button>검색</button>
+            <button>초기화</button>
             &nbsp;&nbsp;&nbsp;
-            <button class="btnPrev">이전</button>
-            <button class="btnNext">다음</button>
+            <button>이전</button>
+            <button>다음</button>
           </form>
         </div>
       </div>
     </div>
     <div class="modal-modify">
       <div class="modal-modify-content">
+        <h2>Modify</h2>
         <input type="text" id="modalNo" />
         <label> Title: <input type="text" id="modalTitleInput" /> </label>
         <textarea
@@ -711,8 +727,9 @@
           id="text_content"
         ></textarea>
         <input type="file" id="img" />
-        <button id="modalSaveBtn">저장</button>
-        <button id="modalCloseBtn">닫기</button>
+        <button id="modalSaveBtn" style="background-color: white">저장</button>
+        <br />
+        <button id="modalCloseBtn" style="background-color: white">닫기</button>
       </div>
     </div>
     <script src="index.js"></script>
