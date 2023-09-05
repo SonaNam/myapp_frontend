@@ -150,10 +150,6 @@
         padding: 0.7em;
         margin: 3%;
       }
-      .modal-modify-content button {
-        padding: ;
-      }
-
       .sign-up-modalbutton {
         background-color: white;
         padding: 0.5em;
@@ -169,7 +165,6 @@
         height: 2.76em;
         margin: 5.8%;
       }
-
       .main_image_text {
         background-attachment: fixed;
         background-position: center;
@@ -177,7 +172,6 @@
         background-repeat: no-repeat;
         position: relative;
       }
-
       .top-image {
         width: 100%;
         height: 35vw;
@@ -188,7 +182,6 @@
         background-repeat: no-repeat;
         position: relative;
       }
-
       .main_image_text {
         position: absolute;
         font-family: cursive;
@@ -198,14 +191,12 @@
         color: beige;
         font-size: 5.9vw;
       }
-
       .Manager-item1 {
         background-color: #fffff0;
         width: 17%;
         padding: 2px;
         justify-content: left;
       }
-
       .Manager-item2 {
         background-color: #fffff0;
         width: 70%;
@@ -215,22 +206,18 @@
         justify-content: center;
         align-items: flex-start;
       }
-
       #info-image {
         text-align: left;
         width: 54%;
         margin-right: 10px;
       }
-
       .Manager-item2 p {
         margin: 1.8%;
         font-size: 0.9rem;
       }
-
       .Manager-item2 img {
         width: 100%;
       }
-
       hr {
         border-color: bisque;
         display: block;
@@ -242,16 +229,13 @@
         border-style: double;
         border-width: 0.4vw;
       }
-
       a {
         text-decoration: none;
         color: inherit;
       }
-
       button {
         cursor: pointer;
       }
-
       .main-list,
       .post-list,
       .membershipboard,
@@ -266,11 +250,9 @@
         background-color: #fffff0;
         text-align: center;
       }
-
       .main-list {
         /* z-index 1*/
         z-index: 1;
-
         background-color: #fffff0;
         padding: 2px;
         display: flex;
@@ -279,7 +261,6 @@
         margin: auto;
         position: absolute;
       }
-
       .post-list {
         position: absolute;
         background-color: #fffff0;
@@ -288,7 +269,6 @@
 
         height: 100%;
       }
-
       .membershipboard {
         position: absolute;
         background-color: #fffff0;
@@ -297,7 +277,6 @@
 
         height: 100%;
       }
-
       .fetimageboard,
       .hospitalboard,
       .groupbuying,
@@ -309,7 +288,6 @@
         left: 0;
         height: 100%;
       }
-
       .post-item {
         border: 0.5vw;
         width: 100%;
@@ -318,7 +296,6 @@
         background-color: fffff0;
         margin-bottom: 0px;
       }
-
       footer button {
         background-color: #4caf50;
         border: none;
@@ -329,7 +306,6 @@
         display: inline-block;
         font-size: 0.8vw;
       }
-
       #add_post_btn {
         background-color: #4caf50;
         border: none;
@@ -340,14 +316,12 @@
         display: inline-block;
         font-size: 0.8vw;
       }
-
       .fetimageboard,
       .hospitalboard {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
       }
-
       .Post-title {
         box-shadow: 0px 4px 12px rgba(1, 8, 0.15);
         position: fixed;
@@ -355,6 +329,11 @@
         background-color: orange;
         color: white;
         border-radius: 8vw;
+      }
+      #postContainer {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
       }
     </style>
   </head>
@@ -553,15 +532,13 @@
             <button class="btnNext">다음</button>
           </form>
         </div>
-        <div class="fetimageboard">
+        <div class="fetimageboard" id="idfetimageboard">
           <div class="Post-title">
             <h2>우리아이자랑게시판</h2>
           </div>
           <table class="post-item">
             <tbody>
-              <tr id="normalTableTitle">
-                <th scope="col"></th>
-              </tr>
+              <tr id="postContainer"></tr>
             </tbody>
           </table>
           <footer>
@@ -572,8 +549,8 @@
             <button class="btnSearch">검색</button>
             <button class="btnReset">초기화</button>
             &nbsp;&nbsp;&nbsp;
-            <button class="btnPrev">이전</button>
-            <button class="btnNext">다음</button>
+            <button id="zzzPrev">이전</button>
+            <button id="zzzNext">다음</button>
           </form>
         </div>
         <div class="modal1">

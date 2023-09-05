@@ -1,6 +1,7 @@
-let currentPage = 0;
 let isLastPage = false;
 const PAGE_SIZE = 6;
+let currentQuery = "";
+let currentPage = 0;
 
 function cardTemplate(no, title, content, creatorName, image, boardValue) {
   const tr = document.createElement("div");
@@ -148,19 +149,41 @@ post_btn.addEventListener("click", async (e) => {
 
   //우리아이 게시판 클릭하면 get------------------------------------------------------
 });
+
 const my_fat_post = document.getElementById("my_fat_post");
-my_fat_post.addEventListener("click", async () => {
+my_fat_post.addEventListener("click", (e) => {
+  e.preventDefault();
+  getPagedList(currentPage);
+});
+async function getPagedList(page) {
   const myfat = "myfat";
-  const response = await fetch(`http://localhost:8080/posts?post=${myfat}`);
+  const resultvalue = "매니저";
+  console.log("Requested Page Number:", page);
+
+  const response = await fetch(
+    `http://localhost:8080/posts/paging?post=${myfat}&creatorName=${resultvalue}&page=${page}&size=${PAGE_SIZE}`
+  );
+
+  console.log(response);
 
   const result = await response.json();
+  console.log(result);
 
-  result.forEach((item) => {
-    // 이미 해당 게시물이 있는지 확인
-    const existingPost = fetimageboard.querySelector(`[data-no="${item.no}"]`);
+  if (
+    document.contains(document.getElementById("zzzPrev")) &&
+    document.contains(document.getElementById("zzzNext"))
+  ) {
+    console.log("버튼 요소가 DOM에 존재합니다.");
+  } else {
+    console.log("버튼 요소가 DOM에 없습니다.");
+  }
+  const postContainer = document.querySelector("#postContainer ");
+  postContainer.innerHTML = "";
+
+  for (let item of result.content) {
+    const existingPost = postContainer.querySelector(`[data-no="${item.no}"]`);
     if (!existingPost) {
-      // 존재하지 않으면 새 게시물 추가
-      fetimageboard.prepend(
+      postContainer.prepend(
         cardTemplate(
           item.no,
           item.title,
@@ -171,8 +194,70 @@ my_fat_post.addEventListener("click", async () => {
         )
       );
     }
+  }
+  currentPage = page;
+  console.log("Updated currentPage:", currentPage);
+
+  isLastPage = result.last;
+  setBtnActive();
+}
+
+// 웹페이지 로딩이 완료되면, 페이징으로 데이터 조회 및 목록 생성
+(() => {
+  window.addEventListener("DOMContentLoaded", () => {
+    // 첫번째 페이지 조회
+    getPagedList(0);
   });
+})();
+document.addEventListener("DOMContentLoaded", function () {
+  var element = document.getElementById("someElement");
+  if (element) {
+    element.addEventListener("click", function () {
+      console.log("Element clicked!");
+    });
+  }
 });
+(() => {
+  // 이전/다음 버튼 선택
+
+  const btnPrev = document.getElementById("zzzPrev");
+  const btnNext = document.getElementById("zzzNext");
+
+  // 이전 버튼
+  btnPrev.addEventListener("click", (e) => {
+    e.preventDefault();
+    getPagedList(currentPage - 1, currentQuery);
+  });
+  // 다음 버튼
+  btnNext.addEventListener("click", (e) => {
+    e.preventDefault();
+    getPagedList(currentPage + 1, currentQuery);
+  });
+})();
+
+function setBtnActive() {
+  const btnPrev = document.getElementById("zzzPrev");
+  const btnNext = document.getElementById("zzzNext");
+
+  if (!btnPrev || !btnNext) {
+    console.log("하나 또는 둘 다의 버튼 요소가 DOM에 없습니다.");
+    return; // 버튼이 없으면 함수를 더 이상 진행하지 않고 종료
+  }
+
+  // 첫번째 페이지이면 이전 버튼 비활성화
+  if (currentPage === 0) {
+    btnPrev.disabled = true;
+  } else {
+    btnPrev.disabled = false;
+  }
+
+  // 마지막 페이지이면 다음 버튼 비활성화
+  if (isLastPage) {
+    btnNext.disabled = true;
+  } else {
+    btnNext.disabled = false;
+  }
+}
 
 // 병원모달
 document.addEventListener("DOMContentLoaded", function () {
